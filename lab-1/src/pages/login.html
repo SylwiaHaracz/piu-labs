@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Login</title>
+    <link rel="stylesheet" href="../css/main.css" />
+  </head>
+  <body>
+    <main class="page">
+      <form class="login-card" action="https://httpbin.org/post" method="post">
+        <p class="lead">Zaloguj się</p>
+        <label for="user" class="label">Email lub login</label>
+        <input
+          id="user"
+          name="username"
+          type="text"
+          autocomplete="username"
+          required
+          placeholder="np. jan.kowalski"
+        />
+        <label for="pwd" class="label">Hasło</label>
+        <input
+          id="pwd"
+          name="password"
+          type="password"
+          autocomplete="current-password"
+          required
+          placeholder="Wprowadź hasło"
+        />
+        <div class="options">
+          <label class="checkbox">
+            <input type="checkbox" name="remember" />
+            <span>Pamiętaj mnie</span>
+          </label>
+          <a class="forgot" href="#" aria-label="Przypomnienie hasła"
+            >Zapomniałeś hasła?</a
+          >
+        </div>
+        <button type="submit" class="btn">Zaloguj</button>
+      </form>
+    </main>
+  </body>
+</html>
