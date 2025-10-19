@@ -1,0 +1,55 @@
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background-color: #f3f3f3;
+  line-height: 1.5;
+  padding: 20px;
+}
+
+header {
+  text-align: center;
+  font-size: 2rem;
+  color: #222;
+}
+
+.galeria {
+  display: grid;
+  grid-column: 1fr;
+  gap: 2rem;
+}
+
+.galeria figure {
+  margin: 0;
+  text-align: center;
+  background-color: #eee;
+  padding: 1rem;
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.galeria img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  display: block;
+  transition: filter 0.3s ease;
+}
+
+figure:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+  background-color: #ddd;
+  font-weight: bold;
+}
+
+figcaption {
+  margin-top: 8px;
+  font-size: 1rem;
+  color: #333;
+}
+
+@media (min-width: 1200px) {
+  .galeria {
+    grid-template-columns: 1fr 1fr;
+  }
+}
