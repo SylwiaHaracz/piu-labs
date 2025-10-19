@@ -1,0 +1,120 @@
+/* Reset stylów */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: Arial, sans-serif;
+}
+main,
+aside {
+  h1,
+  h2,
+  h3,
+  p {
+    margin-bottom: 1rem;
+    line-height: 1.5;
+  }
+}
+
+.container {
+  display: grid;
+  grid-template-columns: [first] auto [sidebar] 25% [last];
+  grid-template-rows: [title-start] auto [title-navbar] auto [navbar-main] auto [main-sidebar] auto [sidebar-footer] auto [footer-end];
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+header {
+  background-color: #f49c11;
+  color: white;
+  grid-area: title-start/first/title-navbar/last;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.logo::before {
+  content: 'Logo';
+}
+
+.logo {
+  display: flex;
+  background-color: white;
+  color: black;
+  border-radius: 5px;
+  width: 6rem;
+  height: 2rem;
+  justify-content: center;
+  align-items: center;
+}
+
+nav {
+  grid-area: title-navbar / first / navbar-main / last;
+  background-color: #2980b9;
+  padding: 1rem;
+  gap: 1rem;
+  display: flex;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+}
+
+main {
+  background-color: #f5f4f4;
+  color: #111111;
+  padding: 1rem;
+}
+
+aside {
+  background-color: #d4efdf;
+  padding: 1rem;
+}
+
+aside div {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  font-size: 4rem;
+}
+
+footer {
+  background-color: #27ae60;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  grid-area: sidebar-footer / first / footer-end / last;
+}
+
+@media (max-width: 1023px) {
+  nav {
+    justify-content: center;
+    align-items: center;
+  }
+  main {
+    grid-area: navbar-main / first / main-sidebar / last;
+  }
+  aside {
+    grid-area: main-sidebar / first / sidebar-footer / last;
+  }
+}
+
+@media (min-width: 1024px) {
+  main {
+    grid-area: navbar-main / first / sidebar-footer / sidebar;
+  }
+  aside {
+    grid-area: navbar-main / sidebar / sidebar-footer / last;
+  }
+}
+
+@media (min-width: 1200px) {
+  body {
+    background-color: lightgrey;
+  }
+}
