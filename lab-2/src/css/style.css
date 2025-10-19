@@ -1,0 +1,45 @@
+html {
+  font-size: 16px; /* bazowy rozmiar czcionki */
+  font-family: system-ui, sans-serif; /* font systemowy */
+  line-height: 1.5; /* lepsza czytelność */
+  font-weight: bold;
+}
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f3f3f3;
+  padding: 2rem 0;
+  font-size: 2rem;
+}
+
+/*index*/
+
+header {
+  text-align: center;
+  color: #2f2f2f;
+}
+
+nav ul {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 5rem 0;
+  list-style: none;
+}
+
+nav li a {
+  display: block;
+  padding: 5rem 10rem;
+  border: 0.5rem solid #2f2f2f;
+  border-radius: 2rem;
+  background-color: #bbe9db;
+  color: #2f2f2f;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  font-size: 2rem;
+}
+
+nav li a:hover {
+  background-color: #2f2f2f;
+  color: #bbe9db;
+  text-decoration: underline;
+}
