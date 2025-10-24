@@ -1,0 +1,197 @@
+:root {
+  --color: none;
+  --blue: #1e5a9c;
+  --red: #d32f2f;
+  --green: #388e3c;
+  --yellow: #fbc02e;
+  --white: #eee;
+  --black: #000;
+  --lgray: #ddd;
+}
+
+body:has(input[value='blue']:checked) {
+  --color: var(--blue);
+}
+body:has(input[value='red']:checked) {
+  --color: var(--red);
+}
+body:has(input[value='green']:checked) {
+  --color: var(--green);
+}
+body:has(input[value='yellow']:checked) {
+  --color: var(--yellow);
+}
+
+html {
+  font-size: 16px;
+  font-family: system-ui, sans-serif;
+  line-height: 1.5;
+}
+body {
+  margin: 1rem;
+  padding: 0;
+  background-color: var(--lgray);
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  margin-top: 5vh;
+}
+
+.image {
+  width: 500px;
+  border-radius: 10px;
+  background-color: var(--white);
+  border: 2px solid var(--color);
+}
+
+body:has(input[value='blue']:checked) .image img.blue {
+  display: block;
+}
+
+body:has(input[value='red']:checked) .image img.red {
+  display: block;
+}
+
+body:has(input[value='green']:checked) .image img.green {
+  display: block;
+}
+
+body:has(input[value='yellow']:checked) .image img.yellow {
+  display: block;
+}
+
+img {
+  width: 100%;
+  display: none;
+}
+
+.opis {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+}
+
+.title h1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.deal {
+  background-color: var(--color);
+  color: var(--white);
+  font-size: 0.8rem;
+  padding: 4px 10px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.color {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.color-button {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  border: 2px solid var(--black);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.color .color-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+input[type='radio'] {
+  display: none;
+}
+
+.color-button.blue {
+  background-color: var(--blue);
+}
+.color-button.red {
+  background-color: var(--red);
+}
+.color-button.green {
+  background-color: var(--green);
+}
+.color-button.yellow {
+  background-color: var(--yellow);
+}
+
+input[type='radio']:checked + .color-button {
+  border: 3px solid var(--white);
+  box-shadow: 0 0 0 2px var(--black);
+  width: calc(1.5rem - 4px);
+  height: calc(1.5rem - 4px);
+}
+
+.size {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.size-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.size-button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 2.5rem;
+  height: 2rem;
+  border: 2px solid var(--black);
+  background-color: var(--white);
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 4px;
+  user-select: none;
+}
+
+.size-buttons input[type='radio'] {
+  display: none;
+}
+
+.size-buttons input[type='radio']:checked + .size-button {
+  background-color: var(--color);
+  color: var(--white);
+  border: 2px solid var(--black);
+}
+
+.price h1 {
+  font-size: 1.5rem;
+  padding: 1rem;
+}
+
+.cart {
+  background-color: var(--color);
+  border: 2px solid var(--black);
+  padding: 1rem 2rem;
+  color: var(--white);
+  border-radius: 5px;
+  font-weight: bold;
+}

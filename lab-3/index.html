@@ -3,10 +3,92 @@
   <head>
     <meta charset="UTF-8" />
     <title>Lab 3</title>
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="./css/polo.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body>
-    <h1>Lab 3</h1>
-    <a href="..">Powrót</a>
+    <div class="container">
+      <div class="image">
+        <img
+          src="./images/polo_b.png"
+          alt="Niebieska koszulka polo"
+          class="blue"
+        />
+        <img
+          src="./images/polo_r.png"
+          alt="Czerwona koszulka polo"
+          class="red"
+        />
+        <img
+          src="./images/polo_g.png"
+          alt="Zielona koszulka polo"
+          class="green"
+        />
+        <img
+          src="./images/polo_y.png"
+          alt="Żółta koszulka polo"
+          class="yellow"
+        />
+      </div>
+      <div class="opis">
+        <div class="title">
+          <h1>
+            Koszulka Polo
+            <span class="deal">Promocja!</span>
+          </h1>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. A totam
+            architecto aliquid.
+          </p>
+        </div>
+        <div class="color">
+          <h2>Kolor</h2>
+          <div class="color-buttons">
+            <label>
+              <input type="radio" name="version" value="blue" checked />
+              <span class="color-button blue"></span>
+            </label>
+            <label>
+              <input type="radio" name="version" value="red" />
+              <span class="color-button red"></span>
+            </label>
+            <label>
+              <input type="radio" name="version" value="green" />
+              <span class="color-button green"></span>
+            </label>
+            <label>
+              <input type="radio" name="version" value="yellow" />
+              <span class="color-button yellow"></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="size">
+          <h2>Rozmiar</h2>
+          <div class="size-buttons">
+            <label>
+              <input type="radio" name="size" value="S" />
+              <span class="size-button">S</span>
+            </label>
+            <label>
+              <input type="radio" name="size" value="M" />
+              <span class="size-button">M</span>
+            </label>
+            <label>
+              <input type="radio" name="size" value="L" />
+              <span class="size-button">L</span>
+            </label>
+            <label>
+              <input type="radio" name="size" value="XL" />
+              <span class="size-button">XL</span>
+            </label>
+          </div>
+        </div>
+        <div class="price">
+          <h1>59,99 zł</h1>
+        </div>
+        <button class="cart">🛒 Do koszyka</button>
+      </div>
+    </div>
   </body>
 </html>
