@@ -47,20 +47,22 @@ body {
   border-radius: 10px;
   background-color: var(--white);
   border: 2px solid var(--color);
+  transition: border-color 0.3s ease, transform 0.3s ease;
 }
 
-body:has(input[value='blue']:checked) .image img.blue {
-  display: block;
+img {
+  width: 100%;
+  display: none;
+  transition: transform 0.5s ease;
 }
 
-body:has(input[value='red']:checked) .image img.red {
-  display: block;
+img:hover {
+  transform: scale(1.1);
 }
 
-body:has(input[value='green']:checked) .image img.green {
-  display: block;
-}
-
+body:has(input[value='blue']:checked) .image img.blue,
+body:has(input[value='red']:checked) .image img.red,
+body:has(input[value='green']:checked) .image img.green,
 body:has(input[value='yellow']:checked) .image img.yellow {
   display: block;
 }
@@ -97,6 +99,7 @@ img {
   padding: 4px 10px;
   border-radius: 4px;
   white-space: nowrap;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .color {
@@ -115,6 +118,7 @@ img {
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .color .color-buttons {
@@ -170,6 +174,7 @@ input[type='radio']:checked + .color-button {
   font-weight: bold;
   border-radius: 4px;
   user-select: none;
+  transition: transform 0.2s ease, background-color 0.3s ease;
 }
 
 .size-buttons input[type='radio'] {
@@ -180,6 +185,7 @@ input[type='radio']:checked + .color-button {
   background-color: var(--color);
   color: var(--white);
   border: 2px solid var(--black);
+  animation: rotate 0.5s ease-out;
 }
 
 .price h1 {
@@ -194,4 +200,31 @@ input[type='radio']:checked + .color-button {
   color: var(--white);
   border-radius: 5px;
   font-weight: bold;
+  transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+.size-button:hover,
+.cart:hover,
+.color-button:hover,
+.deal:hover {
+  transform: scale(1.2);
+  box-shadow: 0 0 5px var(--black);
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  25% {
+    transform: rotate(30deg) scale(1.2);
+  }
+
+  75% {
+    transform: rotate(-30deg) scale(1.2);
+  }
+
+  100% {
+    transform: rotate(0deg) scale(1);
+  }
 }
