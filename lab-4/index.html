@@ -6,7 +6,26 @@
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-    <h1>Lab 4</h1>
-    <a href="..">Powrót</a>
+    <div class="Kanban">
+      <div class="column" id="ToDo">
+        <h1 class="title">Do zrobienia: <span id="ToDoCounter"></span></h1>
+        <button id="add-ToDo">➕ Dodaj kartę</button>
+        <button id="color-change-ToDo">🎨 Zmień kolory</button>
+        <div class="board" id="ToDoBoard"></div>
+      </div>
+      <div class="column" id="InProgress">
+        <h1 class="title">W trakcie: <span id="InProgressCounter"></span></h1>
+        <button id="add-InProgress">➕ Dodaj kartę</button>
+        <button id="color-change-InProgress">🎨 Zmień kolory</button>
+        <div class="board" id="InProgressBoard"></div>
+      </div>
+      <div class="column" id="Done">
+        <h1 class="title">Zrobione: <span id="DoneCounter"></span></h1>
+        <button id="add-Done">➕ Dodaj kartę</button>
+        <button id="color-change-Done">🎨 Zmień kolory</button>
+        <div class="board" id="DoneBoard"></div>
+      </div>
+    </div>
+    <script src="./js/script.js"></script>
   </body>
 </html>
