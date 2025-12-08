@@ -43,14 +43,22 @@ class Ajax {
             clearTimeout(timeoutId);
 
             if (!response.ok) {
-                let details = response.statusText;
+                let details;
 
                 try {
                     const err = await response.json();
-                    details = err?.message || JSON.stringify(err);
-                } catch {}
+                    details =
+                        err?.message ||
+                        `Błąd HTTP ${response.status} ${
+                            response.statusText || ''
+                        }`;
+                } catch {
+                    details = `Błąd HTTP ${response.status} ${
+                        response.statusText || ''
+                    }`;
+                }
 
-                throw new Error(`HTTP error ${response.status}: ${details}`);
+                throw new Error(details);
             }
 
             if (response.status === 204) return null;
