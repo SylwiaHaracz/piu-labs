@@ -2,7 +2,8 @@
 <html lang="pl">
   <head>
     <meta charset="UTF-8" />
-    <title>Lab 7 – Karty produktów</title>
+    <title>Lab 7</title>
+
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -10,104 +11,35 @@
         padding: 40px;
       }
 
-      .products {
+      main {
+        display: grid;
+        grid-template-columns: 1fr 320px;
+        gap: 32px;
+        align-items: start;
+      }
+
+      product-list {
         display: grid;
         grid-template-columns: repeat(auto-fill, 300px);
         gap: 24px;
       }
+
+      shopping-cart {
+        background: #fff;
+        border-radius: 12px;
+        padding: 16px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
     </style>
   </head>
+
   <body>
-    <h1>Lab 7 – Karty produktów</h1>
+    <h1>Lab 7 - sklep</h1>
 
-    <section class="products">
-      <product-card>
-        <img slot="image" src="./src/polo_r.png" />
-        <span slot="name">Koszulka Polo</span>
-        <span slot="price">39,99 zł</span>
-        <div slot="colors">
-          <span style="background: red" data-image="./src/polo_r.png"></span>
-          <span style="background: blue" data-image="./src/polo_b.png"></span>
-          <span style="background: yellow" data-image="./src/polo_y.png"></span>
-          <span style="background: green" data-image="./src/polo_g.png"></span>
-        </div>
-        <div slot="sizes">
-          <button type="button" class="size">S</button>
-          <button type="button" class="size">M</button>
-          <button type="button" class="size">L</button>
-        </div>
-      </product-card>
-
-      <product-card>
-        <img slot="image" src="./src/Hoodie.png" />
-        <span slot="name">Bluza</span>
-        <span slot="price">149,99 zł</span>
-        <span slot="promo">-20%</span>
-        <div slot="colors">
-          <span style="background: black" data-image="./src/Hoodie.png"></span>
-        </div>
-        <div slot="sizes">
-          <button type="button" class="size">M</button>
-          <button type="button" class="size">L</button>
-        </div>
-      </product-card>
-
-      <product-card>
-        <img slot="image" src="./src/BaseballCap.png" />
-        <span slot="name">Czapka z daszkiem</span>
-        <span slot="price">49,99 zł</span>
-        <div slot="colors">
-          <span style="background: black" data-image="./src/Hoodie.png"></span>
-        </div>
-        <div slot="sizes">
-          <button type="button" class="size">One Size</button>
-        </div>
-      </product-card>
-
-      <product-card>
-        <img slot="image" src="./src/polo_r.png" />
-        <span slot="name">Koszulka Polo 2</span>
-        <span slot="price">39,99 zł</span>
-        <span slot="promo">-10%</span>
-        <div slot="colors">
-          <span style="background: red" data-image="./src/polo_r.png"></span>
-          <span style="background: blue" data-image="./src/polo_b.png"></span>
-          <span style="background: yellow" data-image="./src/polo_y.png"></span>
-          <span style="background: green" data-image="./src/polo_g.png"></span>
-        </div>
-        <div slot="sizes">
-          <button type="button" class="size">S</button>
-          <button type="button" class="size">M</button>
-          <button type="button" class="size">L</button>
-        </div>
-      </product-card>
-
-      <product-card>
-        <img slot="image" src="./src/Hoodie.png" />
-        <span slot="name">Bluza 2</span>
-        <span slot="price">149,99 zł</span>
-        <div slot="colors">
-          <span style="background: black" data-image="./src/Hoodie.png"></span>
-        </div>
-        <div slot="sizes">
-          <button type="button" class="size">M</button>
-          <button type="button" class="size">L</button>
-        </div>
-      </product-card>
-
-      <product-card>
-        <img slot="image" src="./src/BaseballCap.png" />
-        <span slot="name">Czapka z daszkiem 2</span>
-        <span slot="price">49,99 zł</span>
-        <span slot="promo">-80%</span>
-        <div slot="colors">
-          <span style="background: black" data-image="./src/Hoodie.png"></span>
-        </div>
-        <div slot="sizes">
-          <button type="button" class="size">One Size</button>
-        </div>
-      </product-card>
-    </section>
+    <main>
+      <product-list></product-list>
+      <shopping-cart></shopping-cart>
+    </main>
 
     <script type="module" src="./app.js"></script>
   </body>

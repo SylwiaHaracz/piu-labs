@@ -1,6 +1,7 @@
-import './components/productCard.js';
+import products from './data.json' with { type: 'json' };
 
-document.addEventListener('add-to-cart', (e) => {
-    console.log('Dodano do koszyka:', e.detail);
-    alert(`Dodano do koszyka: ${e.detail.name}`);
-});
+import './components/productList.js';
+import './components/Cart.js';
+
+const productList = document.querySelector('product-list');
+productList.products = products;

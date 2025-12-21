@@ -2,9 +2,32 @@ export default class ProductCard extends HTMLElement {
     constructor() {
         super();
         this.attachShadow({ mode: 'open' });
+
+        this.selectedColor = null;
+        this.selectedSize = null;
+        this._product = null;
     }
 
-    connectedCallback() {
+    set product(value) {
+        this._product = value;
+        this.render();
+    }
+
+    get product() {
+        return this._product;
+    }
+
+    render() {
+        if (!this._product) return;
+
+        const { name, price, promo, images, sizes } = this._product;
+
+        const firstColor = Object.keys(images)[0];
+        const firstImage = images[firstColor];
+
+        if (!this.selectedColor) this.selectedColor = firstColor;
+        if (!this.selectedSize && sizes?.length) this.selectedSize = sizes[0];
+
         this.shadowRoot.innerHTML = `
       <style>
         :host {
@@ -27,7 +50,7 @@ export default class ProductCard extends HTMLElement {
           position: relative;
         }
 
-        ::slotted(img) {
+        img {
           width: 100%;
           height: 400px;
           object-fit: cover;
@@ -50,6 +73,7 @@ export default class ProductCard extends HTMLElement {
           display: flex;
           flex-direction: column;
           gap: 10px;
+          flex: 1;
         }
 
         .name {
@@ -68,13 +92,35 @@ export default class ProductCard extends HTMLElement {
           flex-wrap: wrap;
         }
 
-        .sizes ::slotted(*) {
+        .colors span {
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          cursor: pointer;
+          border: 2px solid #ccc;
+          box-sizing: border-box;
+        }
+
+        .colors span.active {
+          border-color: #000;
+        }
+
+        .sizes button {
           padding: 4px 8px;
           border-radius: 4px;
+          border: 1px solid #ccc;
+          background: #fff;
+          cursor: pointer;
           font-size: 12px;
         }
 
-        button {
+        .sizes button.active {
+          background: #000;
+          color: #fff;
+          border-color: #000;
+        }
+
+        button.add {
           margin-top: auto;
           border: none;
           padding: 14px;
@@ -84,125 +130,106 @@ export default class ProductCard extends HTMLElement {
           cursor: pointer;
         }
 
-        button:hover {
+        button.add:hover {
           background: #333;
-        }
-
-        .hidden {
-          display: none;
         }
       </style>
 
       <div class="card">
         <div class="image-wrapper">
-          <slot name="image"></slot>
-          <div class="promo">
-            <slot name="promo"></slot>
-          </div>
+          ${promo ? `<div class="promo">${promo}</div>` : ''}
+          <img src="${firstImage}" alt="${name}">
         </div>
 
         <div class="content">
-          <div class="name"><slot name="name"></slot></div>
-          <div class="price"><slot name="price"></slot></div>
-          <div class="colors"><slot name="colors"></slot></div>
-          <div class="sizes"><slot name="sizes"></slot></div>
+          <div class="name">${name}</div>
+          <div class="price">${price.toFixed(2)} zł</div>
+
+          <div class="colors">
+            ${Object.keys(images)
+                .map(
+                    (color) =>
+                        `<span data-color="${color}" style="background:${color}"></span>`
+                )
+                .join('')}
+          </div>
+
+          <div class="sizes">
+            ${sizes
+                ?.map(
+                    (size) =>
+                        `<button type="button" data-size="${size}">${size}</button>`
+                )
+                .join('')}
+          </div>
         </div>
 
-        <button type="button">Do koszyka</button>
+        <button class="add" type="button">Do koszyka</button>
       </div>
     `;
 
-        this._observeSlots();
-        this._setupButton();
-        this._setupColorRadios();
+        this.setupInteractions(images);
     }
 
-    _observeSlots() {
-        const setup = (slotName, selector) => {
-            const slot = this.shadowRoot.querySelector(
-                `slot[name="${slotName}"]`
+    setupInteractions(images) {
+        const img = this.shadowRoot.querySelector('img');
+
+        this.shadowRoot.querySelectorAll('.colors span').forEach((span) => {
+            if (span.dataset.color === this.selectedColor) {
+                span.classList.add('active');
+            }
+
+            span.addEventListener('click', () => {
+                this.selectedColor = span.dataset.color;
+                img.src = images[this.selectedColor];
+
+                this.shadowRoot
+                    .querySelectorAll('.colors span')
+                    .forEach((s) => s.classList.remove('active'));
+                span.classList.add('active');
+            });
+        });
+
+        this.shadowRoot.querySelectorAll('.sizes button').forEach((btn) => {
+            if (btn.dataset.size === this.selectedSize) {
+                btn.classList.add('active');
+            }
+
+            btn.addEventListener('click', () => {
+                this.selectedSize = btn.dataset.size;
+
+                this.shadowRoot
+                    .querySelectorAll('.sizes button')
+                    .forEach((b) => b.classList.remove('active'));
+                btn.classList.add('active');
+            });
+        });
+
+        this.shadowRoot.querySelector('.add').addEventListener('click', () => {
+            const colors = Object.keys(this._product.images);
+            const hasManyColors = colors.length > 1;
+
+            let displayName = this._product.name;
+
+            if (hasManyColors) {
+                displayName += ` (${this.selectedColor}, ${this.selectedSize})`;
+            } else {
+                displayName += ` (${this.selectedSize})`;
+            }
+
+            this.dispatchEvent(
+                new CustomEvent('add-to-cart', {
+                    bubbles: true,
+                    composed: true,
+                    detail: {
+                        id: this._product.id,
+                        name: displayName,
+                        price: this._product.price,
+                        color: this.selectedColor,
+                        size: this.selectedSize,
+                    },
+                })
             );
-            const container = this.shadowRoot.querySelector(selector);
-            if (!slot || !container) return;
-            const toggle = () => {
-                container.classList.toggle(
-                    'hidden',
-                    slot.assignedElements().length === 0
-                );
-            };
-            slot.addEventListener('slotchange', toggle);
-            toggle();
-        };
-
-        setup('promo', '.promo');
-        setup('colors', '.colors');
-        setup('sizes', '.sizes');
-    }
-
-    _setupButton() {
-        this.shadowRoot
-            .querySelector('button')
-            .addEventListener('click', () => {
-                this.dispatchEvent(
-                    new CustomEvent('add-to-cart', {
-                        bubbles: true,
-                        composed: true,
-                        detail: {
-                            name: this.querySelector('[slot="name"]')
-                                ?.textContent,
-                            price: this.querySelector('[slot="price"]')
-                                ?.textContent,
-                        },
-                    })
-                );
-            });
-    }
-
-    _setupColorRadios() {
-        const image = this.querySelector('[slot="image"]');
-        const colorsSlot = this.querySelector('[slot="colors"]');
-        if (!image || !colorsSlot) return;
-
-        const colorSpans = Array.from(colorsSlot.querySelectorAll('span'));
-        colorsSlot.innerHTML = '';
-
-        const name = `color-${Math.random()}`;
-
-        colorSpans.forEach((span, index) => {
-            const colorUrl = span.dataset.image;
-            const colorValue = span.style.background;
-
-            const label = document.createElement('label');
-            label.style.display = 'inline-block';
-            label.style.width = '20px';
-            label.style.height = '20px';
-            label.style.borderRadius = '50%';
-            label.style.background = colorValue;
-            label.style.border = '2px solid #ccc';
-            label.style.cursor = 'pointer';
-            label.style.marginRight = '6px';
-
-            const radio = document.createElement('input');
-            radio.type = 'radio';
-            radio.name = name;
-            radio.value = colorUrl;
-            radio.style.display = 'none';
-            if (index === 0) radio.checked = true;
-            label.appendChild(radio);
-
-            radio.addEventListener('change', () => {
-                if (radio.checked) {
-                    image.src = colorUrl;
-                    Array.from(colorsSlot.querySelectorAll('label')).forEach(
-                        (l) => (l.style.border = '2px solid #ccc')
-                    );
-                    label.style.border = '2px solid #000';
-                }
-            });
-
-            if (index === 0) label.style.border = '2px solid #000';
-
-            colorsSlot.appendChild(label);
         });
     }
 }

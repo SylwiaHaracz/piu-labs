@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "name": "Koszulka Polo",
+    "price": 39.99,
+    "images": {
+      "red": "./src/polo_r.png",
+      "blue": "./src/polo_b.png",
+      "yellow": "./src/polo_y.png",
+      "green": "./src/polo_g.png"
+    },
+    "sizes": ["S", "M", "L"]
+  },
+  {
+    "id": 2,
+    "name": "Bluza",
+    "price": 149.99,
+    "promo": "-20%",
+    "images": {
+      "black": "./src/Hoodie.png"
+    },
+    "sizes": ["M", "L"]
+  },
+  {
+    "id": 3,
+    "name": "Czapka z daszkiem",
+    "price": 49.99,
+    "images": {
+      "black": "./src/BaseballCap.png"
+    },
+    "sizes": ["One Size"]
+  },
+  {
+    "id": 4,
+    "name": "Koszulka Polo 2",
+    "price": 39.99,
+    "promo": "-10%",
+    "images": {
+      "red": "./src/polo_r.png",
+      "blue": "./src/polo_b.png",
+      "yellow": "./src/polo_y.png",
+      "green": "./src/polo_g.png"
+    },
+    "sizes": ["S", "M", "L"]
+  },
+  {
+    "id": 5,
+    "name": "Czapka z daszkiem 2",
+    "price": 49.99,
+    "promo": "-80%",
+    "images": {
+      "black": "./src/BaseballCap.png"
+    },
+    "sizes": ["One Size"]
+  }
+]
